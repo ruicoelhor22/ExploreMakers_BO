@@ -1,0 +1,76 @@
+<template>
+    <div class="row">
+      <div class="col-12">
+        <card :title="table1.title" :subTitle="table1.subTitle">
+          <div slot="raw-content" class="table-responsive">
+            <paper-table :data="table1.data" :columns="table1.columns">
+            </paper-table>
+          </div>
+        </card>
+      </div>
+  
+      
+    </div>
+  </template>
+  <script>
+  import { PaperTable } from "@/components";
+  
+  
+export default {
+  components: {
+    PaperTable,
+  },
+  data() {
+    return {
+      table1: {
+        title: "Visitantes",
+        subTitle: "",
+        columns: ["Nome", "Pais", "Profissao", "Contacto", "Email"],
+        data: [],
+      },
+      novoProfissional: {
+        nome: "",
+        funcao: "",
+      },
+    };
+  },
+  created() {
+    this.carregarDados();
+  },
+  methods: {
+    carregarDados() {
+      const data = localStorage.getItem("visitantes");
+      if (data) {
+        this.table1.data = JSON.parse(data);
+      }
+    },
+    salvarDados() {
+      localStorage.setItem("visitantes", JSON.stringify(this.table1.data));
+    },
+    adicionarProfissional() {
+      if (this.validarFormulario()) {
+        const novoId = this.table1.data.length + 1;
+        const novoProfissional = {
+          id: novoId,
+          nome: this.novoProfissional.nome,
+          funcao: this.novoProfissional.funcao,
+        };
+
+        this.table1.data.push(novoProfissional);
+        this.salvarDados();
+
+        this.resetarFormulario();
+      }
+    },
+    resetarFormulario() {
+      this.novoProfissional.nome = "";
+      this.novoProfissional.funcao = "";
+    },
+    validarFormulario() {
+      return this.novoProfissional.nome.trim() !== "" && this.novoProfissional.funcao.trim() !== "";
+    },
+  },
+};
+</script>
+
+<style></style>
