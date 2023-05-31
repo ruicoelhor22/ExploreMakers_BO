@@ -9,9 +9,9 @@
         <sidebar-link to="/typography" name="Cidades" icon="ti-map" />
         <sidebar-link to="/table-listr" name="Reservas" icon="ti-view-list-alt" />
         <!--<sidebar-link to="/maps" name="Map" icon="ti-map" />-->
-        <sidebar-link to="/notifications" name="Notificações" icon="ti-bell" />
+        <sidebar-link to="/mapa" name="Localização" icon="ti-map" />
       </template>
-      <mobile-menu>
+      <!--<mobile-menu>
         <li class="nav-item">
           <a class="nav-link">
             <i class="ti-panel"></i>
@@ -37,7 +37,7 @@
           </a>
         </li>
         <li class="divider"></li>
-      </mobile-menu>
+      </mobile-menu>-->
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

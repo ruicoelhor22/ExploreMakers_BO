@@ -4,18 +4,18 @@
       <nav>
         <ul>
           <li>
-            <router-link :to="{ path: '/admin' }">Dashboard</router-link>
+            <router-link :to="{ path: '/admin' }">ExploreMakers</router-link>
           </li>
         </ul>
       </nav>
       <div class="copyright d-flex flex-wrap">
-        &copy; Coded with
+        &copy; Programado com
         <i class="fa fa-heart heart"></i> by
-        <a href="https://github.com/cristijora" target="_blank">
-          &nbsp; Cristi Jora.</a
-        >&nbsp; Designed by
-        <a href="https://www.creative-tim.com/?ref=pdf-vuejs" target="_blank"
-          >&nbsp; Creative Tim.</a
+        <a href="https://ruicoelhor22.github.io/ExploreMakers/" target="_blank">
+          &nbsp; Rui Coelho.</a
+        >&nbsp; Desenhado por
+        <a href="https://ruicoelhor22.github.io/ExploreMakers/" target="_blank"
+          >&nbsp; Rui Coelho.</a
         >
       </div>
     </div>

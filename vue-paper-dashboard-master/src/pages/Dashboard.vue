@@ -32,64 +32,34 @@
 
     <!--Charts-->
     <div class="row">
-      <div class="col-12">
-        <chart-card
-          title="Users behavior"
-          sub-title="24 Hours performance"
-          :chart-data="usersChart.data"
-          :chart-options="usersChart.options"
-        >
-          <span slot="footer">
-            <i class="ti-reload"></i> Updated 3 minutes ago
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Click
-            <i class="fa fa-circle text-warning"></i> Click Second Time
-          </div>
-        </chart-card>
-      </div>
+        
 
       <div class="col-md-6 col-12">
         <chart-card
-          title="Email Statistics"
-          sub-title="Last campaign performance"
+          title="Guias com mais tours alocados"
+          sub-title="Entre todos os guias"
           :chart-data="preferencesChart.data"
           chart-type="Pie"
         >
           <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span
+            <i class="ti-timer"></i> Guias com mais tours alocados</span
           >
           <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Bounce
-            <i class="fa fa-circle text-warning"></i> Unsubscribe
+            <i class="fa fa-circle text-info"></i> João Almeida
+            <i class="fa fa-circle text-danger"></i> Paulo Antunes
+            <i class="fa fa-circle text-warning"></i> Joaquim ABC
           </div>
         </chart-card>
       </div>
 
-      <div class="col-md-6 col-12">
-        <chart-card
-          title="2015 Sales"
-          sub-title="All products including Taxes"
-          :chart-data="activityChart.data"
-          :chart-options="activityChart.options"
-        >
-          <span slot="footer">
-            <i class="ti-check"></i> Data information certified
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Tesla Model S
-            <i class="fa fa-circle text-warning"></i> BMW 5 Series
-          </div>
-        </chart-card>
-      </div>
+      
     </div>
   </div>
 </template>
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
 import Chartist from "chartist";
+import { METHODS } from "http";
 export default {
   components: {
     StatsCard,
@@ -101,35 +71,28 @@ export default {
   data() {
     return {
       statsCards: [
-        {
-          type: "warning",
-          icon: "ti-server",
-          title: "Capacity",
-          value: "105GB",
-          footerText: "Updated now",
-          footerIcon: "ti-reload",
-        },
+        
         {
           type: "success",
           icon: "ti-wallet",
-          title: "Revenue",
-          value: "$1,345",
+          title: "Receita total",
+          value: "",
           footerText: "Last day",
           footerIcon: "ti-calendar",
         },
         {
           type: "danger",
-          icon: "ti-pulse",
-          title: "Errors",
-          value: "23",
+          icon: "ti-calendar",
+          title: "Número de Reservas",
+          value: "",
           footerText: "In the last hour",
           footerIcon: "ti-timer",
         },
         {
           type: "info",
-          icon: "ti-twitter-alt",
-          title: "Followers",
-          value: "+45",
+          icon: "ti-user",
+          title: "Número de Guias",
+          value: "",
           footerText: "Updated now",
           footerIcon: "ti-reload",
         },
@@ -205,6 +168,39 @@ export default {
       },
     };
   },
+  created() {
+    this.calcularNumeroGuias();
+    this.calcularNumeroReservas();
+    this.calcularLucro();
+  },
+
+  methods: {
+    calcularNumeroGuias() {
+      const guiasData = JSON.parse(localStorage.getItem("guias")) || [];
+      const numeroGuias = guiasData.length;
+      this.$set(this.statsCards[2], 'value', numeroGuias);
+    },
+    calcularNumeroReservas() {
+      const reservasData = JSON.parse(localStorage.getItem("reservas")) || [];
+      const numeroReservas = reservasData.length;
+      this.$set(this.statsCards[1], 'value', numeroReservas);
+    },
+    calcularLucro() {
+  const reservasData = JSON.parse(localStorage.getItem("reservas")) || [];
+
+  let totalValue = 0;
+  for (const reserva of reservasData) {
+    for (const event of reserva.events) {
+      const preco = parseFloat(event.preco.replace(",", "."));
+      totalValue += preco;
+    }
+  }
+
+  this.$set(this.statsCards[0], "value", totalValue);
+},
+
+
+  }
 };
 </script>
 <style></style>

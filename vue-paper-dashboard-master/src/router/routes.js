@@ -5,13 +5,13 @@ import NotFound from "@/pages/NotFoundPage.vue";
 // Admin pages
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
-import Notifications from "@/pages/Notifications.vue";
 import Icons from "@/pages/Icons.vue";
-import Maps from "@/pages/Maps.vue";
+import Notifications from "@/pages/Mapa.vue";
 import Typography from "@/pages/Typography.vue";
-import TableList from "@/pages/TableList.vue";
+import TableList from "@/pages/Guias.vue";
 import ListaVisitantes from "@/pages/TableListv.vue";
 import ListaReservas from "@/pages/TableListr.vue";
+import Detalhes from "@/pages/Detalhes.vue";
 
 
 const routes = [
@@ -30,20 +30,16 @@ const routes = [
         name: "stats",
         component: UserProfile,
       },
-      {
-        path: "notifications",
-        name: "notifications",
-        component: Notifications,
-      },
+      
       {
         path: "icons",
         name: "icons",
         component: Icons,
       },
       {
-        path: "maps",
-        name: "maps",
-        component: Maps,
+        path: "mapa",
+        name: "mapa",
+        component: Notifications,
       },
       {
         path: "typography",
@@ -64,7 +60,12 @@ const routes = [
         path: "table-listr",
         name: "table-listr",
         component: ListaReservas,
-      }
+      },
+      {
+        path: "detalhes/:emailvis",
+        name: "detalhes",
+        component: Detalhes,
+      },
     ],
   },
   { path: "*", component: NotFound },
