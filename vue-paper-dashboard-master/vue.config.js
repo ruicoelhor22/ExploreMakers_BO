@@ -1,5 +1,5 @@
 module.exports = {
   lintOnSave: false,
-  publicPath: '/E403_BO/',
+  publicPath: '/ExploreMakers_BO/',
 };
 
